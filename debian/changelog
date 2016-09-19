@@ -1,3 +1,199 @@
+rspamd (1.3.5) unstable; urgency=low
+  * [CritFix] Fix issue with finding of end of lines pointers
+  * [Feature] Add DMARC_NA symbol
+  * [Feature] Add R_DKIM_NA / R_SPF_NA / AUTH_NA symbols
+  * [Feature] Add spamhaus DROP dnsbl
+  * [Feature] Add termination callbacks for workers
+  * [Feature] Add user-agent for rspamc
+  * [Feature] Allow parsing of mailbox messages from the commandline
+  * [Feature] Support excluding selected users from ratelimits
+  * [Feature] Yield DMARC_DNSFAIL on lookup failure
+  * [Fix] Banish table.maxn from Lua parts
+  * [Fix] Do not use headers to calculate messages digests
+  * [Fix] Fix absurdic scores for HFILTER_URL_ONLY
+  * [Fix] Fix actrie patterns
+  * [Fix] Fix format string
+  * [Fix] Fix handling of '\0' in lua_tcp
+  * [Fix] Fix issue with empty messages and dkim
+  * [Fix] Fix min_learns option
+  * [Fix] Fix options for SPF dnsfail symbol
+  * [Fix] Fix processing of symbols when reject limit is reached
+  * [Fix] Settings: fix `authenticated` parameter (#886)
+  * [Fix] Try to avoid race condition when using rrd
+  * [Fix] Use the correct macro to get the size of controller
+  * [Fix] Fix build and tests on OpenBSD
+
+ -- Aleksandr Kochkin <alexx.kn@gmail.com>  Mon, 19 Sep 2016 14:00:00 +0100
+
+rspamd (1.3.4) unstable; urgency=low
+  * [Feature] ASN module; support matching ASN/country in multimap
+  * [Feature] Add SPF method in spf return result
+  * [Feature] Add Yandex and Mail.ru forwarding rules
+  * [Feature] Add mempool maps in multimap
+  * [Feature] Add rule for identifying mail sent by eval()'d PHP code
+  * [Feature] Add support of stub DNSSEC resolver to rdns
+  * [Feature] Add task:get_digest method
+  * [Feature] Allow for more fine-grained scoring for ip_score
+  * [Feature] Allow to get digest of a mime part from lua
+  * [Feature] Allow to print message digest in logs
+  * [Feature] Fold DKIM-Signature header
+  * [Feature] Implement encrypted logs
+  * [Feature] Log URLs encrypted if we have log encryption pubkey
+  * [Feature] Pass authenticated bit to lua
+  * [Feature] Read redis backend statistics configuration from global section
+  * [Feature] Show the exact value matched for multima symbols
+  * [Feature] Store task checksum
+  * [Fix] Avoid setting limits when required elements are missing
+  * [Fix] DMARC: Fix alignment checking for subdomains
+  * [Fix] DMARC: deal with missing and spurious spaces
+  * [Fix] Defer insertion of results in ip_score to avoid skewing stats
+  * [Fix] Disable DMARC for local/authorized mail
+  * [Fix] Fix handling of proxied headers in controller
+  * [Fix] Fix hex printing of strings
+  * [Fix] Fix issue with spaces in maps
+  * [Fix] Fix parsing of forwarded IP
+  * [Fix] Fix reload in some plugins and workers
+  * [Fix] Fix reloading on SIGHUP
+  * [Fix] Fix some border cases for DKIM canonicalization
+  * [Fix] Fix url maps
+  * [Fix] Make dnssec configurable option disabled by default for now
+  * [Fix] rspamadm statconvert: force db to be a string
+  * [Fix] rspamadm statconvert: use db/password for learn cache
+  * [Rework] Rework flags in rspamd logger
+
+ -- Aleksandr Kochkin <alexx.kn@gmail.com>  Mon, 19 Sep 2016 13:00:00 +0100
+
+rspamd (1.3.3) unstable; urgency=low
+  * [CritFix] Check hyperscan cache sanity before loading
+  * [CritFix] Fix setting of fuzzy keys (completely breaks fuzzy storage)
+  * [Feature] Add SARBL (sarbl.org) uribl
+  * [Feature] Add `--search-pattern` option to rspamd_stats
+  * [Feature] Add some sanity check for very long from/to log elements
+  * [Feature] Allow to create hashes from string in a single step
+  * [Feature] Fix order of pre and postfilters
+  * [Feature] Improve lua URLs API
+  * [Feature] Improve message about fuzzy rules
+  * [Feature] Pre-calculate blake2 digest for all parts
+  * [Feature] Print radix duplicate keys as IP addresses
+  * [Feature] Simple mechanism for disabling RBLs in local.d/rbl.conf
+  * [Feature] Use faster hash function for fuzzy storage
+  * [Feature] rspamd_stats: support log directory reading
+  * [Fix] Add sanity check for url filters
+  * [Fix] Do not show rmilter section as a fake metric in rspamc
+  * [Fix] Fix URL filters
+  * [Fix] Fix a stupid mistake in util.strequal_caseless
+  * [Fix] Fix blake2b hash of the string "rspamd"
+  * [Fix] Fix filename maps filter
+  * [Fix] Fix finding tld in util.get_tld
+  * [Fix] Fix multimap content filters
+  * [Fix] Fix returning boolean from Lua
+  * [Fix] Fix returning of REDIS_NIL
+  * [Fix] Try to deal with multiple workers terminated
+  * [Fix] Use forced DNS request when calling for lua_http
+  * [Rework] Rework multimap filters, add redis maps
+
+ -- Aleksandr Kochkin <alexx.kn@gmail.com>  Mon, 19 Sep 2016 12:00:00 +0100
+
+rspamd (1.3.2) unstable; urgency=low
+  * [Feature] Add a special symbol for SPF DNS errors: R_SPF_DNSFAIL
+  * [Feature] Add correlations report in fuzzy stats
+  * [Feature] Add experimental CGP integration
+  * [Feature] Add method to get urls length in a text part
+  * [Feature] Add new methods to lua_html to access HTML tags
+  * [Feature] Allow all types of symbols to be added via __newindex method
+  * [Feature] Allow to create settings for authenticated users
+  * [Feature] Allow to get block content for HTML tags
+  * [Feature] Improve DNS failures when dealing with SPF
+  * [Feature] Properly implement R_WHITE_ON_WHITE rule
+  * [Feature] Remove old ugly rules
+  * [Feature] Rspamc can now add dkim signature in mime mode
+  * [Feature] Store content length for HTML tags
+  * [Feature] Support reacher set of HTML colors
+  * [Feature] Try to avoid FP for low contrast fonts detection
+  * [Fix] Add missing HTML colors
+  * [Fix] Add spaces to dkim signature to allow folding
+  * [Fix] Avoid returning NaN as score on scan
+  * [Fix] Decode entitles in href parts
+  * [Fix] Do not cache SPF records with DNS errors
+  * [Fix] Do not crash on cyclic depends
+  * [Fix] Do not insert HELO/HOSTNAME unknown when they are not passed
+  * [Fix] Do not set absent hostname to "unknown"
+  * [Fix] Do not stress redis with KEYS command (#791)
+  * [Fix] Fix DMARC_BAD_POLICY symbol
+  * [Fix] Fix HFILTER_URL module
+  * [Fix] Fix HFILTER_URL_ONELINE rule
+  * [Fix] Fix buffering in CGP integration
+  * [Fix] Fix colors propagation from parent nodes
+  * [Fix] Fix confusing OpenSSL API usage of i2d_RSAPublicKey
+  * [Fix] Fix dependencies id sanity check
+  * [Fix] Fix folding for semicolon separated tokens
+  * [Fix] Fix largest possible TLD behaviour
+  * [Fix] Fix last token folding
+  * [Fix] Fix length calculations in white on white rule
+  * [Fix] Fix multiple request headers structure
+  * [Fix] Fix multiple values headers freeing
+  * [Fix] Fix parsing of background color
+  * [Fix] Fix printing from field in log_urls
+  * [Fix] Fix processing of last element of DMARC policies
+  * [Fix] Further fixes for HTML colors
+  * [Fix] Further fixes for multiple values headers
+  * [Fix] Further fixes for white on white rule
+  * [Fix] Further fixes in HTML tags parsing
+  * [Fix] Ignore content type/subtype case
+  * [Fix] Increase score of R_WHITE_ON_WHITE
+  * [Fix] Parse CGP envelope data
+  * [Fix] Propagate colors in HTML
+  * [Fix] Restore multiple values headers in protocol
+  * [Fix] Restore multiple values in headers processing
+  * [Fix] Some more changes to tag's content length calculations
+  * [Fix] Some more fixes for low contrast fonts detector
+  * [Fix] SpamAssassin plugin: support check_freemail_header('EnvelopeFrom', [..])
+  * [Fix] Trigger HTML_SHORT_LINK_IMG on any external image
+  * [Fix] rspamd_stats: remove deprecated defined(@array)
+
+ -- Aleksandr Kochkin <alexx.kn@gmail.com>  Mon, 19 Sep 2016 11:00:00 +0100
+
+rspamd (1.3.1) unstable; urgency=low
+  * [CritFix] Fix catena passwords validation
+  * [CritFix] Fix crash when the first received is faked
+  * [Feature] Add DMARC_BAD_POLICY symbol when DMARC policy was invalid
+  * [Feature] Allow for matching hostnames in multimap (#773)
+  * [Feature] Allow for setting action based on DMARC disposition
+  * [Feature] Allow limiting of the inbound message size
+  * [Feature] Allow maps with multiple symbols and scores
+  * [Feature] Allow regexps in the emails maps
+  * [Feature] Allow to register metric symbols from multimap
+  * [Feature] Allow to reset redis tokens instead of appendig values
+  * [Feature] Allow to store strings in radix maps
+  * [Feature] Check UTF validity when there are utf regexps in a map
+  * [Feature] Correctly work when there is no hard reject action
+  * [Feature] Implement dependencies for maps
+  * [Fix] Another effort to unbreak sqlite locking
+  * [Fix] Avoid crash when closing mmapped file
+  * [Fix] Do not break history on NaN in required score
+  * [Fix] Ensure that hyperscan cache written is written properly
+  * [Fix] Filter NaN from scores in history
+  * [Fix] Fix DNSBL maps
+  * [Fix] Fix another locking issue in sqlite
+  * [Fix] Fix another locking issue with mapped files
+  * [Fix] Fix deadlock in mmaped file stats
+  * [Fix] Fix dependencies in multimap plugin
+  * [Fix] Fix emails module configuration
+  * [Fix] Fix greylist plugin (#755)
+  * [Fix] Fix greylisting plugin variable usage
+  * [Fix] Fix installed permissions for rspamd_stats
+  * [Fix] Fix locking in mmapped statistics
+  * [Fix] Fix paths in tests
+  * [Fix] Fix prefilter mode for multimap
+  * [Fix] Forgot to commit leftover changes
+  * [Fix] Really fix local.d includes
+  * [Fix] Restore selective greylisting behaviour
+  * [Fix] Set max size on per connection basis
+  * [Fix] Use temporary storage for hyperscan cache
+  * [Rework] Remove systemd socket activation
+
+ -- Aleksandr Kochkin <alexx.kn@gmail.com>  Mon, 19 Sep 2016 10:00:00 +0100
+
 rspamd (1.3.0) unstable; urgency=low
 
   * New release.
